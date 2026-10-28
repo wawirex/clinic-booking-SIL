@@ -335,7 +335,6 @@ The application is intended to run on Render, using a web service and managed Po
 - **Repository:** GitHub repository containing application code, tests and deployment configuration.
 - **CI/CD:** GitHub Actions runs tests and triggers deployment after successful merges to `main`.
 
-**Live URL:** `REPLACE_WITH_DEPLOYED_URL`
 
 ### 3.2 Pipeline behaviour
 
