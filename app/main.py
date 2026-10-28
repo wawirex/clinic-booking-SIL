@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from sqlalchemy import text
 
 from app.config import settings
@@ -28,6 +28,11 @@ app.include_router(appointments.router)
 app.include_router(patients.router)
 
 
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse("/docs")
+
+
 @app.exception_handler(DomainError)
 async def domain_error_handler(_: Request, exc: DomainError):
     return JSONResponse(
@@ -45,6 +50,14 @@ async def request_validation_handler(_: Request, exc: RequestValidationError):
     return JSONResponse(
         status_code=422,
         content={"error": {"code": "validation_error", "message": "Request validation failed.", "details": details}},
+    )
+
+
+@app.get("/health", tags=["meta"])
+def health():
+    with engine.connect() as conn:
+        conn.execute(text("SELECT 1"))
+    return {"status": "ok"}
     )
 
 
