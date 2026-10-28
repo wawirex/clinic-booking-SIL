@@ -1,0 +1,29 @@
+# Render Blueprint. autoDeploy is OFF on purpose: deployments are triggered only
+# by the GitHub Actions pipeline (deploy hook) AFTER tests pass on main.
+databases:
+  - name: clinic-db
+    plan: free
+    databaseName: clinic
+    user: clinic
+
+services:
+  - type: web
+    name: clinic-booking-api
+    runtime: python
+    plan: free
+    branch: main
+    autoDeploy: false
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: DATABASE_URL
+        fromDatabase:
+          name: clinic-db
+          property: connectionString
+      - key: CLINIC_TIMEZONE
+        value: Africa/Nairobi
+      - key: SEED_ON_STARTUP
+        value: "true"
