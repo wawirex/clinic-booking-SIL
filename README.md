@@ -1,5 +1,7 @@
 # Clinic Booking API
 
+**Live app:** https://clinic-booking-api-loaj.onrender.com · [API docs](https://clinic-booking-api-loaj.onrender.com/docs)
+
 A REST API for a clinic appointment booking system, built with **FastAPI, SQLAlchemy 2 and PostgreSQL**. The application supports appointment availability, booking, cancellation and rescheduling, with database-level protection against double booking.
 
 ---
