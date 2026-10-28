@@ -380,7 +380,7 @@ This led to a stronger design using a database-level uniqueness constraint along
 
 The improvement was addressing the underlying data-integrity risk.
 
-### 4.3 One example where AI output was incomplete, and how I addressed it
+### 4.3 Where AI output was incomplete, and how I addressed it
 
 During the README review, AI-assisted feedback identified the partial unique index as a suitable way to prevent duplicate bookings for fixed appointment slots. However, that safeguard alone does not prevent every possible overlap between arbitrary appointment intervals.
 
@@ -388,7 +388,7 @@ I addressed this by making the fixed 30-minute slot assumption explicit and dist
 
 I also recognised that a README review cannot prove that the code, database schema or deployment behaves as documented. Those claims need to be checked against the implementation, tests and running application.
 
-### 4.4 Two decisions I made using my own judgment
+### 4.4 Decisions I made using my own judgment
 
 **Keep the initial scope focused on the core booking workflow.**
 
