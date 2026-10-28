@@ -1,5 +1,10 @@
 import os
 from zoneinfo import ZoneInfo
+from fastapi.responses import RedirectResponse
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse("/docs")
 
 
 def _normalize_db_url(url: str) -> str:
